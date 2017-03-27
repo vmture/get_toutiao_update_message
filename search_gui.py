@@ -2,16 +2,20 @@
 # -*- coding: utf-8 -*-
 __author__ = 'vmture'
 
-import get_xiaomi_update
-import get_tengxun_update
-import get_baidu_update
-import get_360_update
-import get_appstore_update
-import wx
 import csv
+
+import wx
+
+from new_script import qihu_new, apple_new, baidu_new, tengxun_new, xiaomi_new
+from com.common import CommonFunction
+
 
 class ButtonFrame(wx.Frame):
     def __init__(self):
+        self.update = '渠道已更新\n\n'
+        self.un_update = '渠道未更新\n\n'
+        a = CommonFunction()
+        a.create_folders()
         wx.Frame.__init__(self, None, -1, u'今日头条更新信息',
                 size=(500, 150))
         self.panel = wx.Panel(self, -1)
@@ -33,16 +37,16 @@ class ButtonFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.OnClick_guanwang, self.button_guanwang)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
 
-        # self.button_xiaomi.SetDefault()
-        # self.button_online.SetDefault()
-        # self.button_cancel.SetDefault()
-        # self.text = wx.TextCtrl(self.panel, pos=(30, 60), size=(430, 400), style = wx.TE_MULTILINE|wx.TE_RICH2)
 
     def OnClick_xiaomi(self, event):
-        file_path = get_xiaomi_update.run()
+        file_path, update = xiaomi_new.run()
+        if update == 1:
+            str = self.update
+        else:
+            str = self.un_update
         if 'csv' in file_path:
             datas = list(csv.reader(open(file_path, 'r')))
-            str = '文件已创建,路径为:'+file_path+'\n'
+            str += '文件已创建,路径为:'+file_path+'\n'
             old_datas = datas[0]
             new_datas = datas[-1]
             for i in old_datas:
@@ -56,10 +60,14 @@ class ButtonFrame(wx.Frame):
             dlg.Destroy()
 
     def OnClick_baidu(self, event):
-        file_path = get_baidu_update.run()
+        file_path, update = baidu_new.run()
+        if update == 1:
+            str = self.update
+        else:
+            str = self.un_update
         if 'csv' in file_path:
             datas = list(csv.reader(open(file_path, 'r')))
-            str = '文件已创建,路径为:'+file_path+'\n'
+            str += '文件已创建,路径为:'+file_path+'\n'
             old_datas = datas[0]
             new_datas = datas[-1]
             for i in old_datas:
@@ -72,10 +80,14 @@ class ButtonFrame(wx.Frame):
             dlg.Destroy()
 
     def OnClick_tengxun(self, event):
-        file_path = get_tengxun_update.run()
+        file_path, update = tengxun_new.run()
+        if update == 1:
+            str = self.update
+        else:
+            str = self.un_update
         if 'csv' in file_path:
             datas = list(csv.reader(open(file_path, 'r')))
-            str = '文件已创建,路径为:'+file_path+'\n'
+            str += '文件已创建,路径为:'+file_path+'\n'
             old_datas = datas[0]
             new_datas = datas[-1]
             for i in old_datas:
@@ -88,10 +100,14 @@ class ButtonFrame(wx.Frame):
             dlg.Destroy()
 
     def OnClick_360(self, event):
-        file_path = get_360_update.run()
+        file_path, update = qihu_new.run()
+        if update == 1:
+            str = self.update
+        else:
+            str = self.un_update
         if 'csv' in file_path:
             datas = list(csv.reader(open(file_path, 'r')))
-            str = '文件已创建,路径为:'+file_path+'\n'
+            str += '文件已创建,路径为:'+file_path+'\n'
             old_datas = datas[0]
             new_datas = datas[-1]
             for i in old_datas:
@@ -104,10 +120,14 @@ class ButtonFrame(wx.Frame):
             dlg.Destroy()
 
     def OnClick_apple(self, event):
-        file_path = get_appstore_update.run()
+        file_path, update = apple_new.run()
+        if update == 1:
+            str = self.update
+        else:
+            str = self.un_update
         if 'csv' in file_path:
             datas = list(csv.reader(open(file_path, 'r')))
-            str = '文件已创建,路径为:'+file_path+'\n'
+            str += '文件已创建,路径为:'+file_path+'\n'
             old_datas = datas[0]
             new_datas = datas[-1]
             for i in old_datas:

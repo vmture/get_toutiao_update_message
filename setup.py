@@ -9,9 +9,17 @@ from setuptools import setup
 
 APP = ['search_gui.py']
 APP_NAME = 'article_news_update_messages'
-DATA_FILES = ['urls.json', 'get_xiaomi_update.py', 'phantomjs', 'download_apk.py', 'create_folders.py', 'headers.json', 'get_tengxun_update.py', 'get_baidu_update.py', 'get_360_update.py', 'get_appstore_update.py']
+DATA_FILES = ['./json', './com', './new_script', './tool']
 OPTIONS = {
     'iconfile': 'app.icns',
+    'plist': {
+        'CFBundleName': APP_NAME,
+        'CFBundleDisplayName': APP_NAME,
+        'CFBundleGetInfoString': "update codes and add threading",
+        # 'CFBundleIdentifier': "com.metachris.osx.sandwich",
+        'CFBundleVersion': "0.2.0",
+        'CFBundleShortVersionString': "0.2.0",
+    }
 }
 
 setup(
